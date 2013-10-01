@@ -1,6 +1,6 @@
-class Mangos::Mangos
+class Storys::Storys
   attr_reader :root_path
-  attr_reader :mangos_path
+  attr_reader :storys_path
 
   def pathname_to_url(path, relative_from)
     URI.escape(path.relative_path_from(relative_from).to_s)

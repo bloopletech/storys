@@ -1,9 +1,9 @@
-class Mangos::Book
-  attr_reader :mangos
+class Storys::Book
+  attr_reader :storys
   attr_accessor :path
 
-  def initialize(mangos)
-    @mangos = mangos
+  def initialize(storys)
+    @storys = storys
   end
 
   def path_hash
@@ -11,7 +11,7 @@ class Mangos::Book
   end
 
   def url
-    mangos.pathname_to_url(path, mangos.mangos_path)
+    storys.pathname_to_url(path, storys.storys_path)
   end
 
   def page_paths
@@ -19,7 +19,7 @@ class Mangos::Book
   end
 
   def page_urls
-    page_paths.map { |p| mangos.pathname_to_url(p, path) }
+    page_paths.map { |p| storys.pathname_to_url(p, path) }
   end
 
   def title
@@ -27,11 +27,11 @@ class Mangos::Book
   end
 
   def thumbnail_path
-    mangos.mangos_path + "img/thumbnails/" + "#{path_hash}.jpg"
+    storys.storys_path + "img/thumbnails/" + "#{path_hash}.jpg"
   end
 
   def thumbnail_url
-    mangos.pathname_to_url(thumbnail_path, mangos.mangos_path)
+    storys.pathname_to_url(thumbnail_path, storys.storys_path)
   end
 
   PREVIEW_WIDTH = 211
@@ -63,9 +63,9 @@ class Mangos::Book
     puts "There was an error generating thumbnail: #{e.inspect}"
   end
 
-  def self.from_hash(mangos, data)
-    book = Mangos::Book.new(mangos)
-    book.path = mangos.url_to_pathname(Addressable::URI.parse(data["url"]))
+  def self.from_hash(storys, data)
+    book = Storys::Book.new(storys)
+    book.path = storys.url_to_pathname(Addressable::URI.parse(data["url"]))
     book
   end
 

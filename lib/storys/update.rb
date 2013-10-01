@@ -1,22 +1,22 @@
-class Mangos::Update
-  attr_reader :mangos
+class Storys::Update
+  attr_reader :storys
   attr_accessor :books
 
-  def initialize(mangos)
-    @mangos = mangos
+  def initialize(storys)
+    @storys = storys
 
-    @directories = mangos.root_path.descendant_directories.reject { |p| p.basename.to_s[0..0] == '.' }
+    @directories = storys.root_path.descendant_directories.reject { |p| p.basename.to_s[0..0] == '.' }
     load_data
     process
     save_data
   end
 
   def load_data
-    self.books = (Mangos::Mangos.load_json(mangos.mangos_path + "data.json") || []).map { |b| Mangos::Book.from_hash(mangos, b) }
+    self.books = (Storys::Storys.load_json(storys.storys_path + "data.json") || []).map { |b| Storys::Book.from_hash(storys, b) }
   end
 
   def save_data
-    Mangos::Mangos.save_json(mangos.mangos_path + "data.json", books.map { |b| b.to_hash })
+    Storys::Storys.save_json(storys.storys_path + "data.json", books.map { |b| b.to_hash })
   end
 
   def process
@@ -38,7 +38,7 @@ class Mangos::Update
 
   def created(directory)
     puts "creating: #{directory}"
-    book = Mangos::Book.new(mangos)
+    book = Storys::Book.new(storys)
     book.path = directory
     book.generate_thumbnail
     books << book

@@ -1,4 +1,4 @@
-module Mangos::TemplateHelper
+module Storys::TemplateHelper
   def assets_url
     #what
   end

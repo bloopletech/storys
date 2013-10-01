@@ -12,13 +12,13 @@ require "naturally"
 require "RMagick"
 
 #Core Extensions
-require "mangos/core_ext/pathname"
+require "storys/core_ext/pathname"
 
-module Mangos
+module Storys
 end
 
-require "mangos/mangos"
-require "mangos/mangos_package"
-require "mangos/update"
-require "mangos/book"
-require "mangos/template_helper"
+require "storys/storys"
+require "storys/storys_package"
+require "storys/update"
+require "storys/book"
+require "storys/template_helper"

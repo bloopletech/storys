@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require "mangos"
+require "storys"
 require "highline/import"
 
 command = ARGV.first || "sync"
@@ -8,11 +8,11 @@ root_path = Pathname.new(ARGV[1] || ".").realpath
 
 case command
 when "install"
-  mangos = Mangos::Mangos.new(root_path)
-  mangos.install
+  storys = Storys::Storys.new(root_path)
+  storys.install
 when "update"
-  mangos = Mangos::Mangos.new(root_path)
-  mangos.update
+  storys = Storys::Storys.new(root_path)
+  storys.update
 else
   puts "Unknown command #{command.inspect}"
 end
