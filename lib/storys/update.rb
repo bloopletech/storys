@@ -1,33 +1,33 @@
 class Storys::Update
   attr_reader :storys
-  attr_accessor :books
+  attr_accessor :stories
 
   def initialize(storys)
     @storys = storys
 
-    @directories = storys.root_path.descendant_directories.reject { |p| p.basename.to_s[0..0] == '.' }
+    @files = storys.root_path.descendant_files.reject { |p| p.basename.to_s[0..0] == '.' }
     load_data
     process
     save_data
   end
 
   def load_data
-    self.books = (Storys::Storys.load_json(storys.storys_path + "data.json") || []).map { |b| Storys::Book.from_hash(storys, b) }
+    self.stories = (Storys::Storys.load_json(storys.storys_path + "data.json") || []).map { |b| Storys::Story.from_hash(storys, b) }
   end
 
   def save_data
-    Storys::Storys.save_json(storys.storys_path + "data.json", books.map { |b| b.to_hash })
+    Storys::Storys.save_json(storys.storys_path + "data.json", stories.map { |b| b.to_hash })
   end
 
   def process
     #handle deleted first
-    @directories.each do |d|
-      puts "d: #{d.inspect}"
-      book = books.find { |b| b.path == d }
-      if book
-        updated(book)
+    @files.each do |f|
+      puts "f: #{f.inspect}"
+      story = stories.find { |b| b.path == f }
+      if story
+        updated(story)
       else
-        created(d)
+        created(f)
       end
     end
   end
@@ -36,16 +36,14 @@ class Storys::Update
     #
   end
 
-  def created(directory)
-    puts "creating: #{directory}"
-    book = Storys::Book.new(storys)
-    book.path = directory
-    book.generate_thumbnail
-    books << book
+  def created(f)
+    puts "creating: #{f}"
+    story = Storys::Story.new(storys, f)
+    stories << story
   end
 
-  def updated(book)
-    puts "updating: #{book.inspect}"
+  def updated(story)
+    puts "updating: #{story.inspect}"
     #
   end
 end

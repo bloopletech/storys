@@ -1,17 +1,14 @@
 class Pathname
-  def descendant_directories
-    out = []
+  def descendant_files
+    out = children.select { |p| p.html? && !p.hidden? }
     children.select { |p| p.directory? && !p.hidden? }.each do |p|
-      if p.children.any? { |c| c.image? }
-        out << p
-      end
-      out += p.descendant_directories
+      out += p.descendant_files
     end
     out
   end
 
-  def image?
-    file? && %w(.jpg .jpeg .png .gif).include?(extname)
+  def html?
+    file? && %w(.html).include?(extname)
   end
 
   def hidden?

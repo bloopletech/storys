@@ -9,7 +9,7 @@ require "digest"
 require "addressable/uri"
 require "haml"
 require "naturally"
-require "RMagick"
+require "nsf"
 
 #Core Extensions
 require "storys/core_ext/pathname"
@@ -20,5 +20,5 @@ end
 require "storys/storys"
 require "storys/storys_package"
 require "storys/update"
-require "storys/book"
+require "storys/story"
 require "storys/template_helper"
