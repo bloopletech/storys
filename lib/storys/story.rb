@@ -5,7 +5,8 @@ class Storys::Story
   def initialize(storys, path)
     @storys = storys
     @path = path
-    @nsf = Nsf::Document.from_nsf(File.read(@path))
+    @nsf = Nsf::Document.from_html(File.read(@path))
+    puts "nsf: #{@nsf.inspect}"
   end
 
   def path_hash
@@ -21,7 +22,7 @@ class Storys::Story
   end
 
   def self.from_hash(storys, data)
-    Storys::Book.new(storys, storys.url_to_pathname(Addressable::URI.parse(data["url"])))
+    Storys::Story.new(storys, storys.url_to_pathname(Addressable::URI.parse(data["url"])))
   end
 
   def to_hash

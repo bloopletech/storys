@@ -18,7 +18,7 @@ class Storys::Storys
   end
 
   def update_app
-    dev = ENV["MANGOS_ENV"] == "development"
+    dev = ENV["STORYS_ENV"] == "development"
 
     app_children_paths.each do |file|
       storys_file = storys_path + file.basename

@@ -4,25 +4,25 @@ controllers.index = function(search, sort, sortDirection) {
   function sortFor(type) {
     if(!type) type = "publishedOn";
 
-    if(type == "publishedOn") return function(book) {
-      return book.publishedOn;
+    if(type == "publishedOn") return function(story) {
+      return story.publishedOn;
     };
-    if(type == "pages") return function(book) {
-      return book.pageUrls.length;
+    if(type == "wordCount") return function(story) {
+      return story.wordCount;
     };
   }
 
-  var books = store;
+  var storys = store;
   if(search && search != "") {
     regex = RegExp(search, "i");
-    books = _.filter(books, function(book) {
-      return book.title.match(regex);
+    storys = _.filter(storys, function(story) {
+      return story.title.match(regex);
     });
   }
-  books = _.sortBy(books, sortFor(sort));
+  storys = _.sortBy(storys, sortFor(sort));
 
   if(!sortDirection) sortDirection = "desc";
-  if(sortDirection == "desc") books = books.reverse();
+  if(sortDirection == "desc") storys = storys.reverse();
 
   function perPageFromWindow() {
     var windowWidth = $(window).width();
@@ -32,7 +32,7 @@ controllers.index = function(search, sort, sortDirection) {
   }
 
   var perPage = perPageFromWindow();
-  var pages = utils.pages(books, perPage);
+  var pages = utils.pages(storys, perPage);
 
   this.init = function() {
     console.log("starting index");
@@ -69,29 +69,24 @@ controllers.index = function(search, sort, sortDirection) {
     $("#view-index").show().addClass("current-view");
   }
 
-  function addBooks(books) {
-    $("#items").empty();
+  function addStorys(storys) {
+    $("#stories").empty();
 
-    _.each(books, function(book) {
+    _.each(storys, function(story) {
       var item = $("<li>");
       var link = $("<a>");
-      link.attr("href", "#show/" + book.key + "!1");
-      var img = $("<img>");
-      img.attr("src", book.thumbnailUrl);
-      link.append(img);
+      link.attr("href", "#show/" + story.key + "!1");
+      link.text(story.title);
       item.append(link);
 
-      item.append('<div class="info-wrapper"><div class="info"><div class="title">' + book.title + '</div>' +
-        '<img src="img/icons/page_white.png" title="Pages"> ' + book.pageUrls.length + '</div></div>');
-
-      $("#items").append(item);
+      $("#stories").append(item);
     });
   }
 
   this.render = function() {
     console.log("rendering");
-    var booksPage = utils.paginate(books, perPage);
-    addBooks(booksPage);
+    var storysPage = utils.paginate(storys, perPage);
+    addStorys(storysPage);
   }
 
   this.destroy = function() {
