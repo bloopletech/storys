@@ -6,7 +6,6 @@ class Storys::Story
     @storys = storys
     @path = path
     @nsf = Nsf::Document.from_html(File.read(@path))
-    puts "nsf: #{@nsf.inspect}"
   end
 
   def path_hash

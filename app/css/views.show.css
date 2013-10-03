@@ -2,6 +2,10 @@
   display: none;
 }
 
+#view-show iframe {
+  display: none;
+}
+
 #view-show #return-to-index {
   padding: 5px;
 }
