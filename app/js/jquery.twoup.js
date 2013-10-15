@@ -26,18 +26,17 @@
     $(window).resize(twoup.layout).resize();
 
     $(window).bind('hashchange', function() {
-      console.log("hashchange triggered");
       slider.stop(true, true).animate({ "margin-left": -((twoup.page() - 1) * scroll_width) + "px" }, 500, "swing");
     }).trigger('hashchange');
 
     $(window).keydown(function(event) {
       if(event.keyCode == 32 || event.keyCode == 39) {
         event.preventDefault();
-        twoup.page(columns, true);
+        twoup.page(1, true);
       }
       else if(event.keyCode == 8 || event.keyCode == 37) {
         event.preventDefault();
-        twoup.page(-columns, true);
+        twoup.page(-1, true);
       }
     });
 
@@ -58,8 +57,6 @@
   };
 
   twoup.pages = function() {
-    console.log("content_width: ", content_width);
-    console.log("scroll_width: ", scroll_width);
     return Math.ceil(content_width / scroll_width);
   };
 
@@ -93,7 +90,7 @@
     var inner_width = window.innerWidth - (padding_width * 2);
     var inner_height = window.innerHeight - (padding_width * 2);
     var column_width = Math.floor((inner_width - (column_gap_width * (columns - 1))) / columns);
-    scroll_width = column_width + column_gap_width;
+    scroll_width = inner_width + column_gap_width;
 
     padding.css({ "width": inner_width + "px", "height": inner_height + "px", "overflow": "hidden" });
     content.css({ "width": inner_width + "px", "height": inner_height + "px", "-webkit-column-width": column_width + "px",

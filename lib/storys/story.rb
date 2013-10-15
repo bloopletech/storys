@@ -29,7 +29,7 @@ class Storys::Story
   def to_hash
     {
       "url" => url,
-      "wordCount" => 0,
+      "wordCount" => nsf.to_nsf.split(/\s+/).length,
       "title" => title,
       "publishedOn" => path.mtime.to_i,
       "key" => path_hash

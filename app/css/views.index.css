@@ -92,10 +92,10 @@
 #stories li span.title.scrap:before { content: url("/images/icons/page_white_text_scrap.png"); }/* :title => "Has been read 10 or more times.")}*/
 #stories li span.title.unopened:before { content: url("/images/icons/page_white_lightning.png"); }/* :title => "Has been read 10 or more times.")}*/
 
-#stories li span.mfw::before { content: url("/images/icons/comments.png"); vertical-align: middle; padding: 0 3px 0 10px; }
-#stories li span.tags::before { content: url("/images/icons/tag_blue.png"); vertical-align: middle; padding: 0 3px 0 10px; }
-#stories li span.opens::before { content: url("/images/icons/application_go.png"); vertical-align: middle; padding: 0 3px 0 10px; }
-#stories li span.wc::before { content: url("/images/icons/page_white_stack.png"); vertical-align: middle; padding: 0 3px 0 10px; }
+#stories li span.mfw::before { content: url("../img/icons/comments.png"); vertical-align: middle; padding: 0 3px 0 10px; }
+#stories li span.tags::before { content: url("../img/icons/tag_blue.png"); vertical-align: middle; padding: 0 3px 0 10px; }
+#stories li span.opens::before { content: url("../img/icons/application_go.png"); vertical-align: middle; padding: 0 3px 0 10px; }
+#stories li span.wc::before { content: url("../img/icons/page_white_stack.png"); vertical-align: middle; padding: 0 3px 0 10px; }
 
 #stories li:hover, #stories li:hover * { background-color: #000000; color: #ffffff; }
 

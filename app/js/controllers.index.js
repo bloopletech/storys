@@ -24,15 +24,26 @@ controllers.index = function(search, sort, sortDirection) {
   if(!sortDirection) sortDirection = "desc";
   if(sortDirection == "desc") storys = storys.reverse();
 
-  function perPageFromWindow() {
-    var windowWidth = $(window).width();
-    if(windowWidth < 1000) return 15;
-    else if(windowWidth > 1000 && windowWidth < 1500) return 20;
-    else if(windowWidth > 1500) return 25;
-  }
+  storys = _.first(storys, 500);
 
-  var perPage = perPageFromWindow();
-  var pages = utils.pages(storys, perPage);
+  function addStorys(storys) {
+    if($("#stories > li").length) return;
+
+    _.each(storys, function(story) {
+      var item = $("<li>");
+      var link = $("<a>");
+      link.attr("href", "#show/" + story.key + "!1");
+
+      link.append($("<span title='Story title'>").text(story.title));
+      var emblems = $("<div class='emblems'>");
+      emblems.append($("<span class='wc' title='Page count of story'>").text(Math.ceil(story.wordCount / 300)));
+      link.append(emblems);
+
+      item.append(link);
+
+      $("#stories").append(item);
+    });
+  }
 
   this.init = function() {
     console.log("starting index");
@@ -62,32 +73,16 @@ controllers.index = function(search, sort, sortDirection) {
       if(Hammer.utils.isVertical(event.gesture.direction)) return;
       event.gesture.preventDefault();
 
-      if(event.type == 'swipeleft') utils.page(utils.page() + 1, pages);
-      else if(event.type == 'swiperight') utils.page(utils.page() - 1, pages);
+      if(event.type == 'swipeleft') $.twoup.page(1, true);
+      else if(event.type == 'swiperight') $.twoup.page(-1, true);
     });
 
     $("#view-index").show().addClass("current-view");
+    addStorys(storys);
     $.twoup.layout();
   }
 
-  function addStorys(storys) {
-    $("#stories").empty();
-
-    _.each(storys, function(story) {
-      var item = $("<li>");
-      var link = $("<a>");
-      link.attr("href", "#show/" + story.key + "!1");
-      link.text(story.title);
-      item.append(link);
-
-      $("#stories").append(item);
-    });
-  }
-
   this.render = function() {
-    console.log("rendering");
-    var storysPage = utils.paginate(storys, perPage);
-    addStorys(storysPage);
   }
 
   this.destroy = function() {
@@ -96,7 +91,7 @@ controllers.index = function(search, sort, sortDirection) {
     $("#clear-search").unbind("click");
     $("a.sort").unbind("click");
     $("a.sort-direction").unbind("click");
-    $("#items").empty();
+    $("#stories").empty();
     $("#view-index").hammer().off("swiperight").off("swipeleft").off("drag");
     $("#view-index").hide().removeClass("current-view");
   }

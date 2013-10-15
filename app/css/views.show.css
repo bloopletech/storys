@@ -6,6 +6,10 @@
   display: none;
 }
 
+#view-show #story {
+  position: relative;
+}
+
 #view-show #return-to-index {
   padding: 5px;
 }
