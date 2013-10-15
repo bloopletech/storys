@@ -13,5 +13,13 @@ $(function() {
     window.router = new router();
     router.init();
     if(location.hash == "#" || location.hash == "") location.hash = "#index!1";
+
+    $("#wrapper").hammer().on("drag swipeleft swiperight", function(event) {
+      if(Hammer.utils.isVertical(event.gesture.direction)) return;
+      event.gesture.preventDefault();
+
+      if(event.type == 'swipeleft') $.twoup.page(1, true);
+      else if(event.type == 'swiperight') $.twoup.page(-1, true);
+    });
   });
 });

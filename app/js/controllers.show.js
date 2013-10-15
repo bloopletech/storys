@@ -23,8 +23,6 @@ controllers.show = function(key) {
   }
 
   this.render = function() {
-    var index = utils.page();
-
   }
 
   this.destroy = function() {

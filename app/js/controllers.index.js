@@ -69,14 +69,6 @@ controllers.index = function(search, sort, sortDirection) {
       utils.location({ params: [search, sort, $(this).data("sort-direction")], hash: "1" });
     });
 
-    $("#view-index").hammer().on("drag swipeleft swiperight", function(event) {
-      if(Hammer.utils.isVertical(event.gesture.direction)) return;
-      event.gesture.preventDefault();
-
-      if(event.type == 'swipeleft') $.twoup.page(1, true);
-      else if(event.type == 'swiperight') $.twoup.page(-1, true);
-    });
-
     $("#view-index").show().addClass("current-view");
     addStorys(storys);
     $.twoup.layout();
