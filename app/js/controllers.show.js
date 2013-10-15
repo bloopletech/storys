@@ -10,6 +10,7 @@ controllers.show = function(key) {
     $("body").append(iframe);
     iframe.load(function() {
       $("#story").html(iframe[0].contentDocument.body.innerHTML);
+      $.twoup.layout();
       iframe.remove();
     });
     iframe.attr("src", url);
@@ -17,8 +18,8 @@ controllers.show = function(key) {
 
   this.init = function() {
     console.log("starting show");
-    loadStory(story.url);
     $("#view-show").show().addClass("current-view");
+    loadStory(story.url);
   }
 
   this.render = function() {

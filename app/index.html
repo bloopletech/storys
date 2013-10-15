@@ -11,6 +11,8 @@
     <script src="js/lib/jquery-2.0.3.js" type="text/javascript"></script>
     <script src="js/lib/jquery.hammer.js" type="text/javascript"></script>
     <script src="js/lib/underscore.js" type="text/javascript"></script>
+    <script src="js/lib/jquery.browser.js" type="text/javascript"></script>
+    <script src="js/jquery.twoup.js" type="text/javascript"></script>
     <script src="js/framework.js" type="text/javascript"></script>
     <script src="js/controllers.index.js" type="text/javascript"></script>
     <script src="js/controllers.show.js" type="text/javascript"></script>
@@ -20,31 +22,35 @@
     <meta name="viewport" content="width=device-width, height=device-height, user-scalable=no">
   </head>
   <body>
-    <div id="view-index">
-      <div id="header">
-        <input type="text" id="search">
-        <a id="clear-search" href="#index!1">Clear</a>
-        Sort:
-        <a class="sort" data-sort="publishedOn" href="#">Published On</a>
-        <a class="sort" data-sort="pages" href="#">Pages</a>
-        Sort Direction:
-        <a class="sort-direction" data-sort-direction="asc" href="#">Ascending</a>
-        <a class="sort-direction" data-sort-direction="desc" href="#">Descending</a>
+    <div id="wrapper">
+      <div id="views-wrapper">
+        <div id="view-index">
+          <div id="header">
+            <input type="text" id="search">
+            <a id="clear-search" href="#index!1">Clear</a>
+            <br>
+            Sort:
+            <a class="sort" data-sort="publishedOn" href="#">Published On</a>
+            <a class="sort" data-sort="pages" href="#">Pages</a>
+            <br>
+            Sort Direction:
+            <a class="sort-direction" data-sort-direction="asc" href="#">Ascending</a>
+            <a class="sort-direction" data-sort-direction="desc" href="#">Descending</a>
+          </div>
+
+          <ul id="stories">
+          </ul>
+          <div class="clear"></div>
+        </div>
+
+        <div id="view-show">
+    <!--      <div id="return-to-index">
+            <a href="#index!1">Index</a>
+          </div>-->
+
+          <div id="story"></div>
+        </div>
       </div>
-
-      <div id="wrapper">
-        <ul id="stories">
-        </ul>
-        <div class="clear"></div>
-      </div>
-    </div>
-
-    <div id="view-show">
-<!--      <div id="return-to-index">
-        <a href="#index!1">Index</a>
-      </div>-->
-
-      <div id="story"></div>
-    </div>
+   </div>
   </body>
 </html>

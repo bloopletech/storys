@@ -67,6 +67,7 @@ controllers.index = function(search, sort, sortDirection) {
     });
 
     $("#view-index").show().addClass("current-view");
+    $.twoup.layout();
   }
 
   function addStorys(storys) {

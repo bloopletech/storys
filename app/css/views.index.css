@@ -21,11 +21,6 @@
   cursor: pointer;
 }
 
-#wrapper {
-  margin: 0 auto;
-  padding: 40px;
-}
-
 #nav-wrapper {
  width: 204px;
  background-color: #000000;

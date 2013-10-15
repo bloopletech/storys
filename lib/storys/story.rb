@@ -17,7 +17,9 @@ class Storys::Story
   end
 
   def title
-    nsf.title
+    title = nsf.title 
+    title = path.basename.to_s.chomp(path.extname.to_s) if title == ""
+    title
   end
 
   def self.from_hash(storys, data)

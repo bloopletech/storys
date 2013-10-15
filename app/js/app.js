@@ -3,6 +3,8 @@ var store = null;
 $(function() {
   $(document).on("dragstart", "img", false);
 
+  $("#wrapper").twoup("none");
+
   $.getJSON("data.json").done(function(data) {
     if(data.length == 0) alert("No data.json, or data invalid.");
 
