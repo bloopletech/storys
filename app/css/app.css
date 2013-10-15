@@ -27,7 +27,7 @@ h4 { font-size: 20px; margin-bottom: 0.6em; text-align: left; font-weight: bold;
   z-index: 10000;
 }
 
-#page-back:hover, #page-next:hover {
+#page-back:active, #page-next:active {
   background-color: #000000;
   opacity: 0.1;
 }
