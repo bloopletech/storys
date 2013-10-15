@@ -1,7 +1,7 @@
 var store = null;
 
 $(function() {
-  $(document).on("dragstart", "img", false);
+  $(document).on("dragstart", "a, img", false);
 
   $("#wrapper").twoup("none");
 
