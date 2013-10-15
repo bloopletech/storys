@@ -19,3 +19,24 @@ h4 { font-size: 20px; margin-bottom: 0.6em; text-align: left; font-weight: bold;
   padding: 40px;
 }
 
+#page-back, #page-next {
+  position: absolute;
+  top: 0;
+  width: 15%;
+  height: 100%;
+  z-index: 10000;
+}
+
+#page-back:hover, #page-next:hover {
+  background-color: #000000;
+  opacity: 0.1;
+}
+
+#page-back {
+  left: 0;
+}
+
+#page-next {
+  right: 0;
+}
+
