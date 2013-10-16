@@ -7,7 +7,6 @@ require "digest"
 
 #Gems
 require "addressable/uri"
-require "haml"
 require "naturally"
 require "nsf"
 
