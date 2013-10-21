@@ -5,9 +5,9 @@ Gem::Specification.new do |s|
   s.name        = "storys"
   s.version     = Storys::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Brenton Fletcher"]
+  s.authors     = ['Brenton "B-Train" Fletcher']
   s.email       = ["i@bloople.net"]
-  s.homepage    = "http://rubygems.org/gems/storys"
+  s.homepage    = "http://github.com/bloopletech/storys"
   s.summary     = "Storys indexes a collection of stories and generates a SPA that browses the collection."
   s.description = "A collection of stories is a directory (the container) containing 1..* HTML files (stories). Storys indexes a collection in this format, and generates a HTML/JS Single Page Application (SPA) that allows you to browse and view stories in your collection. The SPA UI is much easier to use than using a filesystem browser; and the SPA, along with the collection can be trivially served over a network by putting the collection and the SPA in a directory served by nginx or Apache."
 
