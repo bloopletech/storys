@@ -1,3 +1,5 @@
+var lastControllerLocation = null;
+
 controllers.index = function(search, sort, sortDirection) {
   var _this = this;
 
@@ -75,6 +77,7 @@ controllers.index = function(search, sort, sortDirection) {
   }
 
   this.render = function() {
+    lastControllerLocation = location.hash;
   }
 
   this.destroy = function() {
@@ -84,7 +87,6 @@ controllers.index = function(search, sort, sortDirection) {
     $("a.sort").unbind("click");
     $("a.sort-direction").unbind("click");
     $("#stories").empty();
-    $("#view-index").hammer().off("swiperight").off("swipeleft").off("drag");
     $("#view-index").hide().removeClass("current-view");
   }
 }
