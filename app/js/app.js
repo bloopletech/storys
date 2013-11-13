@@ -5,13 +5,29 @@ $(function() {
 
   $("#wrapper").twoup("none");
 
-  $("#page-back").click(function() {
+
+  $(document).click(function() {
+    $("body").toggleClass("pagination-active");
+  });
+
+  $("#page-back").click(function(e) {
+    e.stopPropagation();
     $.twoup.page(-1, true);
   });
-  $("#page-next").click(function() {
+  $("#page-back-10").click(function(e) {
+    e.stopPropagation();
+    $.twoup.page(-10, true);
+  });
+  $("#page-next").click(function(e) {
+    e.stopPropagation();
     $.twoup.page(1, true);
   });
-  $("#page-home").click(function() {
+  $("#page-next-10").click(function(e) {
+    e.stopPropagation();
+    $.twoup.page(10, true);
+  });
+  $("#page-home").click(function(e) {
+    e.stopPropagation();
     location.hash = lastControllerLocation;
   });
 
