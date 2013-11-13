@@ -26,7 +26,7 @@
     $(window).resize(twoup.layout).resize();
 
     $(window).bind('hashchange', function() {
-      slider.stop(true, true).animate({ "margin-left": -((twoup.page() - 1) * scroll_width) + "px" }, 500, "swing");
+      slider.css({ "margin-left": -((twoup.page() - 1) * scroll_width) + "px" });
     }).trigger('hashchange');
 
     $(window).keydown(function(event) {
