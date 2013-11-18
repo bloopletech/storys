@@ -1,5 +1,16 @@
 /* Shared */
-* { margin: 0; padding: 0; font: 18px/1.4em 'Open Sans', Helvetica, Arial, sans-serif; }
+* {
+  margin: 0;
+  padding: 0;
+  font: 18px/1.4em 'Open Sans', Helvetica, Arial, sans-serif;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 html, body { height: 100%; }
 body { color: #000000; background-color: #ffffff; }
 img { border: none; vertical-align: middle; }
@@ -17,14 +28,6 @@ h4 { font-size: 20px; margin-bottom: 0.6em; text-align: left; font-weight: bold;
 #wrapper {
   margin: 0 auto;
   padding: 40px;
-}
-
-#wrapper, #wrapper div {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 }
 
 .paginator {
