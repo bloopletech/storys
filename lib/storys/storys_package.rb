@@ -7,14 +7,9 @@ class Storys::Storys
   end
 
   def update
+    storys_path.mkdir unless File.exists?(storys_path)
     update_app
     Storys::Update.new(self)
-  end
-
-  def install
-    storys_path.mkdir unless File.exists?(storys_path)
-
-    update_app
   end
 
   def update_app

@@ -1,18 +1,8 @@
 #!/usr/bin/env ruby
 
 require "storys"
-require "highline/import"
 
-command = ARGV.first || "sync"
-root_path = Pathname.new(ARGV[1] || ".").realpath
+root_path = Pathname.new(ARGV.first || ".").realpath
 
-case command
-when "install"
-  storys = Storys::Storys.new(root_path)
-  storys.install
-when "update"
-  storys = Storys::Storys.new(root_path)
-  storys.update
-else
-  puts "Unknown command #{command.inspect}"
-end
+storys = Storys::Storys.new(root_path)
+storys.update
