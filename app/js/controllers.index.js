@@ -12,15 +12,22 @@ controllers.index = function(search, sort, sortDirection) {
     if(type == "wordCount") return function(story) {
       return story.wordCount;
     };
+    if(type == "title") return function(story) {
+      return story.title.toLowerCase();
+    };
   }
 
   var storys = store;
   if(search && search != "") {
-    regex = RegExp(search, "i");
-    storys = _.filter(storys, function(story) {
-      return story.title.match(regex);
+    var words = search.split(/\s+/);
+    _.each(words, function(word) {
+      regex = RegExp(word, "i");
+      storys = _.filter(storys, function(story) {
+        return story.title.match(regex);
+      });
     });
   }
+  if(!sort) sort = "publishedOn";
   storys = _.sortBy(storys, sortFor(sort));
 
   if(!sortDirection) sortDirection = "desc";
@@ -51,6 +58,7 @@ controllers.index = function(search, sort, sortDirection) {
     console.log("starting index");
 
     $("#search").bind("keydown", function(event) {
+      event.stopPropagation();
       if(event.keyCode == 13) {
         event.preventDefault();
         utils.location({ params: [$("#search").val(), sort, sortDirection], hash: "1" });
@@ -59,17 +67,26 @@ controllers.index = function(search, sort, sortDirection) {
 
     $("#clear-search").bind("click", function() {
       $("#search").val("");
+      event.preventDefault();
+      location.href = "#index!1";
     });
 
-    $("a.sort").bind("click", function(event) {
+    $(".sort button").bind("click", function(event) {
       event.preventDefault();
       utils.location({ params: [search, $(this).data("sort"), sortDirection], hash: "1" });
     });
 
-    $("a.sort-direction").bind("click", function(event) {
+    $(".sort button").removeClass("active");
+    $(".sort button[data-sort=" + sort + "]").addClass("active");
+
+    $(".sort-direction button").bind("click", function(event) {
       event.preventDefault();
+      console.log("clicked sorter", $(this).data("sort-direction"));
       utils.location({ params: [search, sort, $(this).data("sort-direction")], hash: "1" });
     });
+
+    $(".sort-direction button").removeClass("active");
+    $(".sort-direction button[data-sort-direction=" + sortDirection + "]").addClass("active");
 
     $("#view-index").show().addClass("current-view");
     addStorys(storys);
@@ -84,8 +101,8 @@ controllers.index = function(search, sort, sortDirection) {
     console.log("destroying index");
     $("#search").unbind("keydown");
     $("#clear-search").unbind("click");
-    $("a.sort").unbind("click");
-    $("a.sort-direction").unbind("click");
+    $(".sort button").unbind("click");
+    $(".sort-direction button").unbind("click");
     $("#stories").empty();
     $("#view-index").hide().removeClass("current-view");
   }

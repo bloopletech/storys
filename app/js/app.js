@@ -5,11 +5,6 @@ $(function() {
 
   $("#wrapper").twoup("none");
 
-
-  $(document).click(function() {
-    $("body").toggleClass("pagination-active");
-  });
-
   $("#page-back").click(function(e) {
     e.stopPropagation();
     $.twoup.page(-1, true);

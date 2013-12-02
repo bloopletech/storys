@@ -2,8 +2,8 @@
   display: none;
 }
 
-#header { margin: 0 0 12px 0; }
-#search { width: 300px; }
+#header { margin: 5px 5px 24px 5px; }
+#search { width: 250px; }
 #actions { float: right; }
 
 #success {
@@ -78,7 +78,7 @@
 
 /* List page only */
 
-#stories { list-style-type: none; margin: 0; }
+#stories { list-style-type: none; margin: 0; padding: 0; }
 #stories li { display: block; margin: 10px 0; padding: 1px; }
 
 #stories li, #stories li * { background-color: #ffffff; color: #000000; }

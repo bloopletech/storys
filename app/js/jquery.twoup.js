@@ -26,6 +26,8 @@
     $(window).resize(twoup.layout).resize();
 
     $(window).bind('hashchange', function() {
+console.log("twoup ", (twoup.page() - 1));
+      console.log("setting slider left to ", -((twoup.page() - 1) * scroll_width));
       slider.css({ "margin-left": -((twoup.page() - 1) * scroll_width) + "px" });
     }).trigger('hashchange');
 
@@ -57,13 +59,17 @@
   };
 
   twoup.pages = function() {
+    console.log("content_width ", content_width);
+    console.log("scroll_width ", scroll_width);
     return Math.ceil(content_width / scroll_width);
   };
 
   twoup.bound_page_number = function(number) {
+    console.log("number ", number);
     var index = parseInt(number); 
     if(isNaN(index) || index < 1) index = 1;
     if(index > twoup.pages()) index = twoup.pages();
+    console.log("index ", index);
 
     return index;
   };
@@ -87,16 +93,24 @@
     columns = twoup.columns();
 
     var column_gap_width = (padding_width * 2) + parseInt(content.css("-webkit-column-rule-width") || content.css("column-rule-width"));
-    var inner_width = window.innerWidth - (padding_width * 2);
-    var inner_height = window.innerHeight - (padding_width * 2);
+    var wrapper_width = window.innerWidth;
+    var wrapper_height = window.innerHeight;
+    var inner_width = wrapper_width - (padding_width * 2);
+    var inner_height = wrapper_height - (padding_width * 2);
+    console.log("inner_width ", inner_width);
+    console.log("inner_height ", inner_height);
     var column_width = Math.floor((inner_width - (column_gap_width * (columns - 1))) / columns);
     scroll_width = inner_width + column_gap_width;
 
-    padding.css({ "width": inner_width + "px", "height": inner_height + "px", "overflow": "hidden" });
+    console.log("column_width ", column_width);
+    console.log("scroll_width ", scroll_width);
+
+    padding.css({ "width": wrapper_width + "px", "height": wrapper_height + "px", "overflow": "hidden" });
     content.css({ "width": inner_width + "px", "height": inner_height + "px", "-webkit-column-width": column_width + "px",
      "-moz-column-width": column_width + "px", "column-width": column_width + "px", "-webkit-column-gap": column_gap_width + "px",
      "-moz-column-gap": column_gap_width + "px", "column-gap": column_gap_width + "px" });
     content_width = content[0].scrollWidth;
+    console.log("content_width ", content_width);
 
     if(columns != old_columns) $(window).trigger("onhashchange");
   };
