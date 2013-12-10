@@ -12,22 +12,27 @@
       return;
     }
 
-    twoup.content = content = $("<div></div>").css({ "-webkit-column-rule": column_rule, "-moz-column-rule": column_rule, "column-rule": column_rule });
-    twoup.slider = slider = $("<div></div>");
-    twoup.padding = padding = $(this).css({ "overflow": "hidden" });
+    if(twoup.enabled()) {
+      twoup.content = content = $("<div></div>").css({ "-webkit-column-rule": column_rule, "-moz-column-rule": column_rule, "column-rule": column_rule });
+      twoup.slider = slider = $("<div></div>");
+      twoup.padding = padding = $(this).css({ "overflow": "hidden" });
 
-    var children = padding.children().detach();
-    padding.append(slider);
-    slider.append(content);
-    content.append(children);
+      var children = padding.children().detach();
+      padding.append(slider);
+      slider.append(content);
+      content.append(children);
 
-    if(!twoup.enabled()) return;
+      $(window).resize(twoup.layout).resize();
 
-    $(window).resize(twoup.layout).resize();
-
-    $(window).bind('hashchange', function() {
-      slider.css({ "margin-left": -((twoup.page() - 1) * scroll_width) + "px" });
-    }).trigger('hashchange');
+      $(window).bind('hashchange', function() {
+        slider.animate({ "margin-left": -((twoup.page() - 1) * scroll_width) + "px" }, 300);
+      }).trigger('hashchange');
+    }
+    else {
+      $(window).bind('hashchange', function() {
+        $("body").animate({ scrollTop: (twoup.page() - 1) * Math.max(0, $(window).height() - 60) }, 300);
+      }).trigger('hashchange');
+    }
 
     $(window).keydown(function(event) {
       if(event.keyCode == 32 || event.keyCode == 39) {
@@ -45,19 +50,35 @@
 
   twoup.enabled = function() {
     //at the moment, only WebKit and MSIE10 has proper support for css3 columns AND getting the right width for a column element with overflow
-    return $.browser.webkit || ($.browser.msie && $.browser.version >= 10);
+    //at the moment, android and iphone scale the output weirdly, and their CPU can't really handle the multicolums on large pages
+    return ($.browser.webkit || ($.browser.msie && $.browser.version >= 10)) && (!$.browser.android && !$.browser.iphone);
   }
 
   twoup.columns = function() {
-    return Math.max(1, Math.floor($(window).width() / (18 * padding_width)));
+    if(twoup.enabled()) {
+      return Math.max(1, Math.floor($(window).width() / (18 * padding_width)));
+    }
+    else {
+      return 1;
+    }
   };
 
   twoup.column_width = function() {
-    return twoup.enabled() ? parseInt(content.css("-webkit-column-width") || content.css("-moz-column-width") || content.css("column-width")) : content.width()
+    if(twoup.enabled()) {
+      return parseInt(content.css("-webkit-column-width") || content.css("-moz-column-width") || content.css("column-width")); 
+    }
+    else {
+      return content.width();
+    }
   };
 
   twoup.pages = function() {
-    return Math.ceil(content_width / scroll_width);
+    if(twoup.enabled()) {
+      return Math.ceil(content_width / scroll_width);
+    }
+    else {
+      return Math.ceil($(document).height() / ($(window).height() - 60));
+    }
   };
 
   twoup.bound_page_number = function(number) {
@@ -81,6 +102,8 @@
   };
 
   twoup.layout = function() {
+    if(!twoup.enabled()) return;
+
     padding_width = parseInt(padding.css("padding-top"));
 
     var old_columns = columns;
