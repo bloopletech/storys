@@ -4,5 +4,5 @@ require "storys"
 
 root_path = Pathname.new(ARGV.first || ".").realpath
 
-storys = Storys::Storys.new(root_path)
+storys = Storys::Package.new(root_path)
 storys.update

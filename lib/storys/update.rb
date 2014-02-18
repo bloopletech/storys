@@ -1,11 +1,11 @@
 class Storys::Update
-  attr_reader :storys
+  attr_reader :package
   attr_accessor :stories
 
-  def initialize(storys)
-    @storys = storys
+  def initialize(package)
+    @package = package
 
-    @files = storys.root_path.descendant_files.reject { |p| p.basename.to_s[0..0] == '.' }
+    @files = package.root_path.descendant_files.reject { |p| p.basename.to_s[0..0] == '.' }
     @stories = []
     #load_data
     process
@@ -13,12 +13,12 @@ class Storys::Update
   end
 
   def load_data
-    self.stories = (Storys::Storys.load_json(storys.storys_path + "data.json") || []).map { |b| Storys::Story.from_hash(storys, b) }
+    self.stories = (Storys::Package.load_json(package.package_path + "data.json") || []).map { |b| Storys::Story.from_hash(package, b) }
   end
 
   def save_data
     puts "\nWriting out JSON file"
-    Storys::Storys.save_json(storys.storys_path + "data.json", stories.map { |b| b.to_hash })
+    Storys::Package.save_json(package.package_path + "data.json", stories.map { |b| b.to_hash })
   end
 
   def process
@@ -45,7 +45,7 @@ class Storys::Update
   end
 
   def created(f)
-    story = Storys::Story.new(storys, f)
+    story = Storys::Story.new(package, f)
     stories << story
   end
 

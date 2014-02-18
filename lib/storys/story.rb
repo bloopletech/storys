@@ -1,9 +1,9 @@
 class Storys::Story
-  attr_reader :storys
+  attr_reader :package
   attr_reader :path, :nsf
 
-  def initialize(storys, path)
-    @storys = storys
+  def initialize(package, path)
+    @package = package
     @path = path
     @nsf = Nsf::Document.from_html(File.read(@path))
   end
@@ -13,17 +13,23 @@ class Storys::Story
   end
 
   def url
-    storys.pathname_to_url(path, storys.storys_path)
+    package.pathname_to_url(path, package.package_path)
   end
 
   def title
     title = nsf.title 
     title = path.basename.to_s.chomp(path.extname.to_s) if title == ""
+
+    directory_path = path.relative_path_from(package.root_path).dirname.to_s
+
+    title = "#{directory_path}/#{title}" unless directory_path == "" || directory_path == "."
+    title = title.gsub("/", " / ")
+
     title
   end
 
-  def self.from_hash(storys, data)
-    Storys::Story.new(storys, storys.url_to_pathname(Addressable::URI.parse(data["url"])))
+  def self.from_hash(package, data)
+    Storys::Story.new(package, package.url_to_pathname(Addressable::URI.parse(data["url"])))
   end
 
   def to_hash

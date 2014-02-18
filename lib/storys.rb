@@ -16,8 +16,6 @@ require "storys/core_ext/pathname"
 module Storys
 end
 
-require "storys/storys"
-require "storys/storys_package"
+require "storys/package"
 require "storys/update"
 require "storys/story"
-require "storys/template_helper"
