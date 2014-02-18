@@ -1,6 +1,7 @@
 #Ruby stdlib
 require "pathname"
 require "fileutils"
+require "cgi"
 require "uri"
 require "json"
 require "digest"
@@ -8,7 +9,6 @@ require "digest"
 #Gems
 require "addressable/uri"
 require "naturally"
-require "nsf"
 
 #Core Extensions
 require "storys/core_ext/pathname"

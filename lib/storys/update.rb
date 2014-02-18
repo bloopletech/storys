@@ -18,8 +18,16 @@ class Storys::Update
 
   def save_data
     puts "\nWriting out JSON file"
-    Storys::Package.save_json(package.package_path + "data.json", stories.map { |b| b.to_hash })
+    stories_hashes = []
+    stories.each_with_index do |s, i|
+      $stdout.write "\rProcessing #{i + 1} of #{stories.length} (#{(((i + 1) / stories.length.to_f) * 100.0).round}%)"
+      $stdout.flush
+
+      stories_hashes << s.to_hash
+    end
+    Storys::Package.save_json(package.package_path + "data.json", stories_hashes)
   end
+
 
   def process
     @files.each_with_index do |f, i|

@@ -17,7 +17,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency "bundler", ">= 1.0.0"
   s.add_dependency "addressable", ">= 2.3.5"
   s.add_dependency "naturally", ">= 1.0.3"
-  s.add_dependency "nsf"
 
   s.files        = `git ls-files`.split("\n")
   s.executables  = `git ls-files`.split("\n").map{|f| f =~ /^bin\/(.*)/ ? $1 : nil}.compact

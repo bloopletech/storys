@@ -1,11 +1,15 @@
 class Storys::Story
   attr_reader :package
-  attr_reader :path, :nsf
+  attr_reader :path
 
   def initialize(package, path)
     @package = package
     @path = path
-    @nsf = Nsf::Document.from_html(File.read(@path))
+  end
+
+  #It is assumed that the HTML document is a valid HTML expression of an NSF document
+  def html
+    @html ||= File.read(@path)
   end
 
   def path_hash
@@ -17,7 +21,7 @@ class Storys::Story
   end
 
   def title
-    title = nsf.title 
+    title = title_from_html
     title = path.basename.to_s.chomp(path.extname.to_s) if title == ""
 
     directory_path = path.relative_path_from(package.root_path).dirname.to_s
@@ -35,10 +39,23 @@ class Storys::Story
   def to_hash
     {
       "url" => url,
-      "wordCount" => nsf.to_nsf.split(/\s+/).length,
+      "wordCount" => word_count_from_html,
       "title" => title,
       "publishedOn" => path.mtime.to_i,
       "key" => path_hash
     }
+  end
+
+  private
+
+  def title_from_html
+    html =~ /<title>(.*?)<\/title>/m
+    $1 ? CGI::unescapeHTML($1) : ""
+  end
+
+  def word_count_from_html
+    html =~ /<body>(.*?)<\/body>/m
+    body = CGI::unescapeHTML($1.gsub(/<\/?(p|b|i|h[1234567]).*?>/m, " "))
+    (title + " " + (body ? body : "")).split(/\s+/).length
   end
 end
