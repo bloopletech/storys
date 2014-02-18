@@ -10,6 +10,7 @@ class Storys::Update
     #load_data
     process
     save_data
+    puts "\nDone!"
   end
 
   def load_data
