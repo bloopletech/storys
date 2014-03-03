@@ -17,14 +17,14 @@ class Storys::Story
   end
 
   def url
-    package.pathname_to_url(path, package.package_path)
+    package.pathname_to_url(path, package.app_path)
   end
 
   def title
     title = title_from_html
     title = path.basename.to_s.chomp(path.extname.to_s) if title == ""
 
-    directory_path = path.relative_path_from(package.root_path).dirname.to_s
+    directory_path = path.relative_path_from(package.path).dirname.to_s
 
     title = "#{directory_path}/#{title}" unless directory_path == "" || directory_path == "."
     title = title.gsub("/", " / ")
@@ -47,7 +47,7 @@ class Storys::Story
   end
 
   def update_manifest
-    manifest_path = package.pathname_to_url(package.package_path + "manifest", path.dirname)
+    manifest_path = package.pathname_to_url(package.app_path + "manifest", path.dirname)
     new_html = html.sub(/<html.*?>/, "<html manifest=\"#{manifest_path}\">")
     File.open(path, "w") { |f| f << new_html }
   end

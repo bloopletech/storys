@@ -5,7 +5,7 @@ class Storys::Update
   def initialize(package)
     @package = package
 
-    @files = package.root_path.descendant_files.reject { |p| p.basename.to_s[0..0] == '.' }
+    @files = package.path.descendant_files.reject { |p| p.basename.to_s[0..0] == '.' }
     @stories = []
     #load_data
     process
@@ -14,7 +14,7 @@ class Storys::Update
   end
 
   def load_data
-    self.stories = (Storys::Package.load_json(package.package_path + "data.json") || []).map { |b| Storys::Story.from_hash(package, b) }
+    self.stories = (Storys::Package.load_json(package.app_path + "data.json") || []).map { |b| Storys::Story.from_hash(package, b) }
   end
 
   def save_data
@@ -26,7 +26,7 @@ class Storys::Update
 
       stories_hashes << s.to_hash
     end
-    Storys::Package.save_json(package.package_path + "data.json", stories_hashes)
+    Storys::Package.save_json(package.app_path + "data.json", stories_hashes)
   end
 
   def process
