@@ -29,7 +29,6 @@ class Storys::Update
     Storys::Package.save_json(package.package_path + "data.json", stories_hashes)
   end
 
-
   def process
     @files.each_with_index do |f, i|
       $stdout.write "\rProcessing #{i + 1} of #{@files.length} (#{(((i + 1) / @files.length.to_f) * 100.0).round}%)"
@@ -55,6 +54,7 @@ class Storys::Update
 
   def created(f)
     story = Storys::Story.new(package, f)
+    story.update_manifest
     stories << story
   end
 

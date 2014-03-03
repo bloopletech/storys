@@ -46,6 +46,12 @@ class Storys::Story
     }
   end
 
+  def update_manifest
+    manifest_path = package.pathname_to_url(package.package_path + "manifest", path.dirname)
+    new_html = html.sub(/<html.*?>/, "<html manifest=\"#{manifest_path}\">")
+    File.open(path, "w") { |f| f << new_html }
+  end
+
   private
 
   def title_from_html
@@ -54,7 +60,7 @@ class Storys::Story
   end
 
   def word_count_from_html
-    html =~ /<body>(.*?)<\/body>/m
+    html =~ /<body.*?>(.*?)<\/body>/m
     body = CGI::unescapeHTML($1.gsub(/<\/?(p|b|i|h[1234567]).*?>/m, " "))
     (title + " " + (body ? body : "")).split(/\s+/).length
   end

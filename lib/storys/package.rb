@@ -10,7 +10,7 @@ class Storys::Package
   end
 
   def pathname_to_url(path, relative_from)
-    URI.escape(path.relative_path_from(relative_from).to_s)
+    URI.escape(path.relative_path_from(relative_from).cleanpath.to_s)
   end
 
   def url_to_pathname(url)
