@@ -52,11 +52,9 @@ class Storys::Story
     File.open(path, "w") { |f| f << new_html }
   end
 
-  private
-
   def title_from_html
     html =~ /<title>(.*?)<\/title>/m
-    $1 ? CGI::unescapeHTML($1) : ""
+    $1 ? CGI::unescapeHTML($1.gsub(/\s+/, " ").strip) : ""
   end
 
   def word_count_from_html
