@@ -8,6 +8,7 @@ class Storys::Update
     @files = package.path.descendant_files.reject { |p| p.basename.to_s[0..0] == '.' }
     @stories = []
     #load_data
+    convert_files
     process
     save_data
     puts "\nDone!"
@@ -30,10 +31,8 @@ class Storys::Update
   end
 
   def process
-    @files.each_with_index do |f, i|
-      $stdout.write "\rProcessing #{i + 1} of #{@files.length} (#{(((i + 1) / @files.length.to_f) * 100.0).round}%)"
-      $stdout.flush
-
+    puts "\nLoading files"
+    each_file do |f|
       created f
     end
     #handle deleted first
@@ -52,8 +51,8 @@ class Storys::Update
     #
   end
 
-  def created(f)
-    story = Storys::Story.new(package, f)
+  def created(path)
+    story = Storys::Story.new(package, path)
     story.update_manifest
     stories << story
   end
@@ -61,5 +60,27 @@ class Storys::Update
   def updated(story)
     puts "updating: #{story.inspect}"
     #
+  end
+
+  def convert_files
+    puts "\nConverting files to NSF format..."
+    each_file do |f|
+      convert_file f
+    end
+  end
+
+  def convert_file(path)
+    doc = Nsf::Document.from_html(path.read)
+    new_path = path.update_ext(".html")
+    new_path.write(doc.to_html, preserve_mtime: true)
+  end
+
+  def each_file
+    @files.each_with_index do |f, i|
+      $stdout.write "\rProcessing #{i + 1} of #{@files.length} (#{(((i + 1) / @files.length.to_f) * 100.0).round}%)"
+      $stdout.flush
+
+      yield f
+    end
   end
 end

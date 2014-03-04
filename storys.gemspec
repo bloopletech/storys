@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "bundler", ">= 1.0.0"
   s.add_development_dependency "rspec", ">= 2.14.1"
   s.add_development_dependency "factory_girl", ">= 4.4.0"
+  s.add_dependency "nsf"
   s.add_dependency "addressable", ">= 2.3.5"
   s.add_dependency "naturally", ">= 1.0.3"
 

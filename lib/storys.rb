@@ -7,6 +7,7 @@ require "json"
 require "digest"
 
 #Gems
+require "nsf"
 require "addressable/uri"
 require "naturally"
 

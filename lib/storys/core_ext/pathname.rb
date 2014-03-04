@@ -14,4 +14,18 @@ class Pathname
   def hidden?
     basename.to_s[0..0] == "."
   end
+
+  def update_ext(extension)
+    return self if extname == extension
+    Pathname.new("#{to_s}#{extension}")
+  end
+
+  def write(content, options = {})
+    preserve_mtime = options.delete(:preserve_mtime)
+    _atime, _mtime = atime, mtime if preserve_mtime
+
+    open("w", options) { |file| file << content }
+
+    utime(_atime, _mtime) if preserve_mtime
+  end
 end

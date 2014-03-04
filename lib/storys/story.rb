@@ -49,7 +49,7 @@ class Storys::Story
   def update_manifest
     manifest_path = package.pathname_to_url(package.app_path + "manifest", path.dirname)
     new_html = html.sub(/<html.*?>/, "<html manifest=\"#{manifest_path}\">")
-    File.open(path, "w") { |f| f << new_html }
+    path.write(new_html, preserve_mtime: true)
   end
 
   def title_from_html

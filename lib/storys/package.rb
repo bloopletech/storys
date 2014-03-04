@@ -22,8 +22,8 @@ class Storys::Package
 
   def update
     app_path.mkdir unless File.exists?(app_path)
-    update_app
     Storys::Update.new(self)
+    update_app
   end
 
   def update_app
@@ -43,7 +43,38 @@ class Storys::Package
       FileUtils.cp_r(Storys::Package.gem_path + "app/.", app_path, :verbose => dev)
     end
 
+    save_manifest
+
     FileUtils.chmod_R(0755, app_path, :verbose => dev)
+  end
+
+  def save_manifest
+    File.open(app_path + "manifest", "w") do |f|
+      f << <<-EOFSM
+CACHE MANIFEST
+# Timestamp #{Time.now.to_i}
+CACHE:
+css/lib/bootstrap.css
+css/app.css
+css/views.index.css
+css/views.show.css
+js/lib/jquery-2.0.3.js
+js/lib/bootstrap.js
+js/lib/underscore.js
+js/lib/jquery.browser.js
+js/jquery.twoup.js
+js/framework.js
+js/controllers.index.js
+js/controllers.show.js
+js/app.js
+img/icons/page_white_stack.png
+fonts/lib/glyphicons-halflings-regular.eot
+fonts/lib/glyphicons-halflings-regular.svg
+fonts/lib/glyphicons-halflings-regular.ttf
+fonts/lib/glyphicons-halflings-regular.woff
+data.json
+EOFSM
+    end
   end
 
   def self.gem_path
