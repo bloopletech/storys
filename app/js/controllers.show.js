@@ -16,10 +16,16 @@ controllers.show = function(key) {
     iframe.attr("src", url);
   }
 
+  function setVisited(key) {
+    if(!localStorage["visited." + key]) localStorage["visited." + key] = "0";
+    localStorage["visited." + key] = parseInt(localStorage["visited." + key]) + 1;
+  }
+
   this.init = function() {
     console.log("starting show");
     $("#view-show").show().addClass("current-view");
     loadStory(story.url);
+    setVisited(story.key);
   }
 
   this.render = function() {
@@ -32,3 +38,5 @@ controllers.show = function(key) {
   }
 }
 
+controllers.show.setup = function() {
+};

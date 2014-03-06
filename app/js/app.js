@@ -1,4 +1,5 @@
 var store = null;
+if(!localStorage["visited"]) localStorage["visited"] = {};
 
 $(function() {
   $(document).on("dragstart", "a, img", false);

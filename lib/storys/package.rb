@@ -29,7 +29,7 @@ class Storys::Package
   def update_app
     dev = ENV["STORYS_ENV"] == "development"
 
-    app_children_paths.each do |file|
+    (app_children_paths + [manifest_path]).each do |file|
       storys_file = app_path + file.basename
       FileUtils.rm_rf(storys_file, :verbose => dev)
     end
@@ -41,15 +41,14 @@ class Storys::Package
       end
     else
       FileUtils.cp_r(Storys::Package.gem_path + "app/.", app_path, :verbose => dev)
+      save_manifest
     end
-
-    save_manifest
 
     FileUtils.chmod_R(0755, app_path, :verbose => dev)
   end
 
   def save_manifest
-    File.open(app_path + "manifest", "w") do |f|
+    File.open(manifest_path, "w") do |f|
       f << <<-EOFSM
 CACHE MANIFEST
 # Timestamp #{Time.now.to_i}
@@ -76,6 +75,11 @@ data.json
 EOFSM
     end
   end
+
+  def manifest_path
+    app_path + "manifest"
+  end
+
 
   def self.gem_path
     Pathname.new(__FILE__).dirname.parent.parent

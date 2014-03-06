@@ -35,22 +35,17 @@ controllers.index = function(search, sort, sortDirection) {
 
   storys = _.first(storys, 500);
 
-  function addStorys(storys) {
+  function getVisits(key) {
+    return parseInt(localStorage["visited." + key]);
+  }
+
+  function addStories(storys) {
     if($("#stories > li").length) return;
 
     _.each(storys, function(story) {
-      var item = $("<li>");
-      var link = $("<a>");
-      link.attr("href", "#show/" + story.key + "!1");
-
-      link.append($("<span title='Story title'>").text(story.title));
-      var emblems = $("<div class='emblems'>");
-      emblems.append($("<span class='wc' title='Page count of story'>").text(Math.ceil(story.wordCount / 300)));
-      link.append(emblems);
-
-      item.append(link);
-
-      $("#stories").append(item);
+      story.visits = getVisits(story.key);
+      story.pages = Math.ceil(story.wordCount / 300);
+      $("#stories").append(controllers.index.storyTemplate({ story: story }));
     });
   }
 
@@ -89,7 +84,7 @@ controllers.index = function(search, sort, sortDirection) {
     $(".sort-direction button[data-sort-direction=" + sortDirection + "]").addClass("active");
 
     $("#view-index").show().addClass("current-view");
-    addStorys(storys);
+    addStories(storys);
     $.twoup.layout();
   }
 
@@ -106,4 +101,8 @@ controllers.index = function(search, sort, sortDirection) {
     $("#stories").empty();
     $("#view-index").hide().removeClass("current-view");
   }
+}
+
+controllers.index.setup = function() {
+  controllers.index.storyTemplate = Handlebars.compile($("#stories-template").remove().html());
 }
