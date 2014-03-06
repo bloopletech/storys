@@ -60,13 +60,13 @@ css/views.show.css
 js/lib/jquery-2.0.3.js
 js/lib/bootstrap.js
 js/lib/underscore.js
+js/lib/handlebars-v1.3.0.js
 js/lib/jquery.browser.js
 js/jquery.twoup.js
 js/framework.js
 js/controllers.index.js
 js/controllers.show.js
 js/app.js
-img/icons/page_white_stack.png
 fonts/lib/glyphicons-halflings-regular.eot
 fonts/lib/glyphicons-halflings-regular.svg
 fonts/lib/glyphicons-halflings-regular.ttf
