@@ -30,7 +30,7 @@
     }
     else {
       $(window).bind('hashchange', function() {
-        $("body").animate({ scrollTop: (twoup.page() - 1) * Math.max(0, $(window).height() - 60) }, 300);
+        $("body").animate({ scrollTop: (twoup.page() - 1) * Math.max(0, $(window).height() - 51 - 60) }, 300);
       }).trigger('hashchange');
     }
 
@@ -77,7 +77,7 @@
       return Math.ceil(content_width / scroll_width);
     }
     else {
-      return Math.ceil($(document).height() / ($(window).height() - 60));
+      return Math.ceil($(document).height() / ($(window).height() - 51 - 60));
     }
   };
 
@@ -111,7 +111,7 @@
 
     var column_gap_width = (padding_width * 2) + parseInt(content.css("-webkit-column-rule-width") || content.css("column-rule-width"));
     var wrapper_width = window.innerWidth;
-    var wrapper_height = window.innerHeight;
+    var wrapper_height = window.innerHeight - 51;
     var inner_width = wrapper_width - (padding_width * 2);
     var inner_height = wrapper_height - (padding_width * 2);
     var column_width = Math.floor((inner_width - (column_gap_width * (columns - 1))) / columns);
