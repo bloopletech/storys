@@ -77,6 +77,7 @@ var router = function() {
         currentRoute = route;
 
         if(currentController) {
+          $(".current-view .navbar-content").append($("#navbar-content-target").contents().detach());
           currentController.destroy();
           delete currentController;
         }
@@ -84,6 +85,7 @@ var router = function() {
         var controllerFunction = controllers[utils.location().controller];
         currentController = new (controllerFunction.bind.apply(controllerFunction, [null].concat(utils.location().params)));
         currentController.init();
+        $("#navbar-content-target").empty().append($(".current-view .navbar-content").contents().detach());
       }
       
       currentController.render();

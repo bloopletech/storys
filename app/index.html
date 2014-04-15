@@ -26,8 +26,8 @@
   <body>
     <div id="wrapper">
       <div id="view-index">
-        <div id="header">
-          <form class="form-inline">
+        <div class="navbar-content">
+          <form class="navbar-form ">
             <input type="text" id="search" class="form-control">
             <span class="btn-group sort">
               <button class="btn btn-default" data-sort="publishedOn" type="button">Published On</button>
@@ -73,21 +73,35 @@
       </div>
 
       <div id="view-show">
+        <div class="navbar-content">
+          <button type="button" class="btn btn-default navbar-btn" id="page-home">
+            <span class="glyphicon glyphicon-eject"></span>
+          </button>
+        </div>
+
         <div id="story"></div>
       </div>
     </div>
 
-    <!--<div id="page-home" class="paginator">❌</div>-->
-
     <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
       <div class="container-fluid">
         <div class="nav navbar-nav navbar-left">
-          <button type="button" class="btn btn-default navbar-btn" id="page-back-10">◀◀</button>
-          <button type="button" class="btn btn-default navbar-btn" id="page-back">◀</button>
+          <button type="button" class="btn btn-default navbar-btn" id="page-back-10">
+            <span class="glyphicon glyphicon-backward"></span>
+          </button>
+          <button type="button" class="btn btn-default navbar-btn" id="page-back">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+          </button>
         </div>
         <div class="navbar-nav navbar-right">
-          <button type="button" class="btn btn-default navbar-btn" id="page-next">▶</button>
-          <button type="button" class="btn btn-default navbar-btn" id="page-next-10">▶▶</button>
+          <button type="button" class="btn btn-default navbar-btn" id="page-next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          </button>
+          <button type="button" class="btn btn-default navbar-btn" id="page-next-10">
+            <span class="glyphicon glyphicon-forward"></span>
+          </button>
+        </div>
+        <div id="navbar-content-target">
         </div>
       </div>
     </nav>
