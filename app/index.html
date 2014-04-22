@@ -24,6 +24,29 @@
     <meta name="viewport" content="width=device-width, height=device-height, user-scalable=no">
   </head>
   <body>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="nav navbar-nav navbar-left">
+          <button type="button" class="btn btn-default navbar-btn" id="page-back-10">
+            <span class="glyphicon glyphicon-backward"></span>
+          </button>
+          <button type="button" class="btn btn-default navbar-btn" id="page-back">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+          </button>
+        </div>
+        <div class="navbar-nav navbar-right">
+          <button type="button" class="btn btn-default navbar-btn" id="page-next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          </button>
+          <button type="button" class="btn btn-default navbar-btn" id="page-next-10">
+            <span class="glyphicon glyphicon-forward"></span>
+          </button>
+        </div>
+        <div id="navbar-content-target">
+        </div>
+      </div>
+    </nav>
+
     <div id="wrapper">
       <div id="view-index">
         <div class="navbar-content">
@@ -82,28 +105,5 @@
         <div id="story"></div>
       </div>
     </div>
-
-    <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
-      <div class="container-fluid">
-        <div class="nav navbar-nav navbar-left">
-          <button type="button" class="btn btn-default navbar-btn" id="page-back-10">
-            <span class="glyphicon glyphicon-backward"></span>
-          </button>
-          <button type="button" class="btn btn-default navbar-btn" id="page-back">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-          </button>
-        </div>
-        <div class="navbar-nav navbar-right">
-          <button type="button" class="btn btn-default navbar-btn" id="page-next">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-          </button>
-          <button type="button" class="btn btn-default navbar-btn" id="page-next-10">
-            <span class="glyphicon glyphicon-forward"></span>
-          </button>
-        </div>
-        <div id="navbar-content-target">
-        </div>
-      </div>
-    </nav>
   </body>
 </html>
