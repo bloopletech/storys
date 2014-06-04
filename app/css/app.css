@@ -17,7 +17,8 @@ h4 { margin-top: 0; margin-bottom: 0.6em; text-align: left; }
 
 #wrapper {
   padding: 30px;
-  margin-top: 51px;
+  position: relative;
+  top: 51px;
 }
 
 #navbar-content-target {
