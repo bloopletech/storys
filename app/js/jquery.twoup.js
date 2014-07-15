@@ -56,7 +56,7 @@
 
   twoup.columns = function() {
     if(twoup.enabled()) {
-      return Math.max(1, Math.floor($(window).width() / (18 * padding_width)));
+      return Math.max(1, Math.floor($(window).width() / (26 * padding_width)));
     }
     else {
       return 1;
@@ -65,7 +65,7 @@
 
   twoup.column_width = function() {
     if(twoup.enabled()) {
-      return parseInt(content.css("-webkit-column-width") || content.css("-moz-column-width") || content.css("column-width")); 
+      return parseInt(content.css("-webkit-column-width") || content.css("-moz-column-width") || content.css("column-width"));
     }
     else {
       return content.width();
@@ -82,7 +82,7 @@
   };
 
   twoup.bound_page_number = function(number) {
-    var index = parseInt(number); 
+    var index = parseInt(number);
     if(isNaN(index) || index < 1) index = 1;
     if(index > twoup.pages()) index = twoup.pages();
 
