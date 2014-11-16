@@ -33,8 +33,6 @@ controllers.index = function(search, sort, sortDirection) {
   if(!sortDirection) sortDirection = "desc";
   if(sortDirection == "desc") storys = storys.reverse();
 
-  storys = _.first(storys, 500);
-
   function getVisits(key) {
     return parseInt(localStorage["visited." + key]);
   }
@@ -85,7 +83,6 @@ controllers.index = function(search, sort, sortDirection) {
 
     $("#view-index").show().addClass("current-view");
     addStories(storys);
-    $.twoup.layout();
   }
 
   this.render = function() {

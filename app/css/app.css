@@ -6,7 +6,6 @@ body, div, a, img {
   user-select: none;
 }
 
-html, body { height: 100%; }
 h1, p, ul { margin-top: 0; margin-bottom: 1.2em; }
 h1 { margin-top: 0; margin-bottom: 0.6em; text-align: left; }
 h2 { margin-top: 0; margin-bottom: 0.6em; text-align: left; }
@@ -16,9 +15,9 @@ h4 { margin-top: 0; margin-bottom: 0.6em; text-align: left; }
 .clear { clear: both; }
 
 #wrapper {
+  max-width: 1200px;
+  margin: 51px auto 0 auto;
   padding: 30px;
-  position: relative;
-  top: 51px;
 }
 
 #navbar-content-target {

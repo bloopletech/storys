@@ -10,7 +10,6 @@ controllers.show = function(key) {
     $("body").append(iframe);
     iframe.load(function() {
       $("#story").html(iframe[0].contentDocument.body.innerHTML);
-      $.twoup.layout();
       iframe.remove();
     });
     iframe.attr("src", url);

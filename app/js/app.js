@@ -4,23 +4,25 @@ if(!localStorage["visited"]) localStorage["visited"] = {};
 $(function() {
   $(document).on("dragstart", "a, img", false);
 
-  $("#wrapper").twoup("none");
+  $(window).bind('hashchange', function() {
+    $(window).scrollTop((utils.page() - 1) * Math.max(0, $(window).height() - 51 - 60));
+  }).trigger('hashchange');
 
   $("#page-back").click(function(e) {
     e.stopPropagation();
-    $.twoup.page(-1, true);
+    utils.page(utils.page() - 1);
   });
   $("#page-back-10").click(function(e) {
     e.stopPropagation();
-    $.twoup.page(-10, true);
+    utils.page(utils.page() - 10);
   });
   $("#page-next").click(function(e) {
     e.stopPropagation();
-    $.twoup.page(1, true);
+    utils.page(utils.page() + 1);
   });
   $("#page-next-10").click(function(e) {
     e.stopPropagation();
-    $.twoup.page(10, true);
+    utils.page(utils.page() + 10);
   });
   $("#page-home").click(function(e) {
     e.stopPropagation();
