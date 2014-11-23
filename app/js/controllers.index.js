@@ -64,28 +64,34 @@ controllers.index = function(search, sort, sortDirection) {
       location.href = "#index!1";
     });
 
-    $(".sort button").bind("click", function(event) {
+    $("paper-button[data-sort]").bind("click", function(event) {
       event.preventDefault();
       utils.location({ params: [search, $(this).data("sort"), sortDirection], hash: "1" });
     });
 
-    $(".sort button").removeClass("active");
-    $(".sort button[data-sort=" + sort + "]").addClass("active");
+    $("paper-button[data-sort]").removeAttr("raised");
+    $("paper-button[data-sort=" + sort + "]").attr("raised", "raised");
 
-    $(".sort-direction button").bind("click", function(event) {
+    $("#sort-direction").bind("click", function(event) {
       event.preventDefault();
-      console.log("clicked sorter", $(this).data("sort-direction"));
-      utils.location({ params: [search, sort, $(this).data("sort-direction")], hash: "1" });
+      console.log("clicked sorter", sortDirection);
+      sortDirection = (sortDirection == "asc") ? "desc" : "asc";
+      utils.location({ params: [search, sort, sortDirection], hash: "1" });
     });
 
     $(".sort-direction button").removeClass("active");
     $(".sort-direction button[data-sort-direction=" + sortDirection + "]").addClass("active");
 
-    $("#view-index").show().addClass("current-view");
-    addStories(storys);
+    $("#view-index").css("display", "flex").addClass("current-view");
   }
 
   this.render = function() {
+    _.each(storys, function(story) {
+      story.visits = getVisits(story.key);
+      story.pages = Math.ceil(story.wordCount / 300);
+    });
+
+    document.querySelector("#story-list").data = storys;
     lastControllerLocation = location.hash;
   }
 
@@ -95,11 +101,11 @@ controllers.index = function(search, sort, sortDirection) {
     $("#clear-search").unbind("click");
     $(".sort button").unbind("click");
     $(".sort-direction button").unbind("click");
-    $("#stories").empty();
+    //$("#stories").empty();
     $("#view-index").hide().removeClass("current-view");
   }
 }
 
 controllers.index.setup = function() {
-  controllers.index.storyTemplate = Handlebars.compile($("#stories-template").remove().html());
+  //controllers.index.storyTemplate = Handlebars.compile($("#stories-template").remove().html());
 }

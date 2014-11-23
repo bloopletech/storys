@@ -4,15 +4,23 @@
     <meta charset="utf-8">
     <title>Storys</title>
 
-    <link href="css/lib/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="bower_components/normalize.css/normalize.css" type="text/css">
     <link href="css/app.css" rel="stylesheet" type="text/css">
     <link href="css/views.index.css" rel="stylesheet" type="text/css">
     <link href="css/views.show.css" rel="stylesheet" type="text/css">
 
+    <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <link rel="import" href="bower_components/core-list/core-list.html">
+    <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+    <link rel="import" href="bower_components/paper-button/paper-button.html">
+    <link rel="import" href="bower_components/core-input/core-input.html">
+    <link rel="import" href="bower_components/core-toolbar/core-toolbar.html">
+    <link rel="import" href="bower_components/core-dropdown-menu/core-dropdown-menu.html">
+    <link rel="import" href="bower_components/core-dropdown/core-dropdown.html">
+    <link rel="import" href="bower_components/core-selector/core-selector.html">
+    <link rel="import" href="bower_components/core-item/core-item.html">
     <script src="js/lib/jquery-2.0.3.js" type="text/javascript"></script>
-    <script src="js/lib/bootstrap.js" type="text/javascript"></script>
     <script src="js/lib/underscore.js" type="text/javascript"></script>
-    <script src="js/lib/handlebars-v1.3.0.js" type="text/javascript"></script>
     <script src="js/framework.js" type="text/javascript"></script>
     <script src="js/controllers.index.js" type="text/javascript"></script>
     <script src="js/controllers.show.js" type="text/javascript"></script>
@@ -22,82 +30,60 @@
     <meta name="viewport" content="width=device-width, height=device-height, user-scalable=no">
   </head>
   <body>
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container-fluid">
-        <div class="nav navbar-nav navbar-left">
-          <button type="button" class="btn btn-default navbar-btn" id="page-back-10">
-            <span class="glyphicon glyphicon-backward"></span>
-          </button>
-          <button type="button" class="btn btn-default navbar-btn" id="page-back">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-          </button>
-        </div>
-        <div class="navbar-nav navbar-right">
-          <button type="button" class="btn btn-default navbar-btn" id="page-next">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-          </button>
-          <button type="button" class="btn btn-default navbar-btn" id="page-next-10">
-            <span class="glyphicon glyphicon-forward"></span>
-          </button>
-        </div>
-        <div id="navbar-content-target">
-        </div>
+    <div id="header">
+      <div id="navbar-content-target">
       </div>
-    </nav>
+    </div>
 
     <div id="wrapper">
       <div id="view-index">
         <div class="navbar-content">
-          <form class="navbar-form ">
-            <input type="text" id="search" class="form-control">
-            <span class="btn-group sort">
-              <button class="btn btn-default" data-sort="publishedOn" type="button">Published On</button>
-              <button class="btn btn-default" data-sort="wordCount" type="button">Pages</button>
-              <button class="btn btn-default" data-sort="title" type="button">Title</button>
-            </span>
-            <span class="btn-group sort-direction">
-              <button class="btn btn-default" data-sort-direction="asc" type="button">
-                <span class="glyphicon glyphicon-sort-by-attributes"></span>
-              </button>
-              <button class="btn btn-default" data-sort-direction="desc" type="button">
-                <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
-              </button>
-            </span>
-            <button type="button" class="btn btn-default" id="clear-search">
-              <span class="glyphicon glyphicon-remove"></span> Clear
-            </button>
-          </form>
+          <core-toolbar justify="center">
+            <input is="core-input" id="search">
+            <paper-icon-button id="clear-search" icon="clear"></paper-icon-button>
+            <paper-button data-sort="publishedOn">Published On</paper-button>
+            <paper-button data-sort="wordCount">Pages</paper-button>
+            <paper-button data-sort="title">Title</paper-button>
+            <paper-icon-button id="sort-direction" icon="sort"></paper-icon-button>
+          </core-toolbar>
         </div>
 
-        <ul id="stories">
-          <div id="stories-template">
-            <li>
-              <a href="#show/{{story.key}}!1">
-                <span title="Story title">{{story.title}}</span>
+        <core-list id="story-list" data="{{data}}" height="27">
+          <template>
+            <div class="item">
+              <a href="#show/{{model.key}}!1">
+                <span title="Story title">{{model.title}}</span>
                 <div class="emblems">
-                  {{#if story.visits}}
+                  <template if="{{ model.visits > 0 }}">
                     <span class="label label-info" title="Visits to story">
                       <span class="glyphicon glyphicon-star-empty"></span>
-                      {{story.visits}}
+                      {{model.visits}}
                     </span>&thinsp;
-                  {{/if}}
+                  </template>
                   <span class="label label-info" title="Page count of story">
                     <span class="glyphicon glyphicon-file"></span>
-                    {{story.pages}}
+                    {{model.pages}}
                   </span>
                 </div>
               </a>
-            </li>
-          </div>
-        </ul>
-        <div class="clear"></div>
+            </div>
+          </template>
+        </core-list>
       </div>
 
       <div id="view-show">
         <div class="navbar-content">
-          <button type="button" class="btn btn-default navbar-btn" id="page-home">
-            <span class="glyphicon glyphicon-eject"></span>
-          </button>
+          <core-toolbar>
+            <paper-icon-button id="page-home" icon="arrow-back"></paper-icon-button>
+            <div flex>
+              <core-dropdown-menu id="story-navigation">
+                <core-dropdown class="dropdown">
+                  <core-selector>
+                  </core-selector>
+                </core-dropdown>
+              </core-dropdown-menu>
+            </div>
+          </core-toolbar>
         </div>
 
         <div id="story"></div>
