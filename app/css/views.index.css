@@ -1,54 +1,56 @@
 #view-index {
   display: none;
-  flex-direction: column;
 }
 
-/*#header { margin: 5px 5px 24px 5px; }*/
+#header { margin: 5px 5px 24px 5px; }
 #search { width: 250px; }
 #actions { float: right; }
 
 /* List page only */
 
-#story-list {
-  flex: 1;
+#stories {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
-
-#story-list .item {
+#stories li {
+  display: block;
+  margin: 10px 0;
+  padding: 1px;
+  height: 29px;
+  position: relative;
 }
-
-#story-list .item > a {
+#stories li > a, #stories li > div {
   display: block;
   overflow: hidden;
   white-space: nowrap;
   text-decoration: none;
-  position: relative;
-  padding: 6px;
 }
-#story-list .item > a, #story-list .item > div, #story-list .item .emblems {
-  /*height: 27px;*/
+#stories li > a, #stories li > div, #stories li .emblems {
+  height: 27px;
 }
-#story-list .item .emblems {
+#stories li .emblems {
   display: block;
   position: absolute;
-  top: 6px;
-  right: 6px;
-  padding: 0 0 0 6px;
+  top: 0;
+  right: 0;
+  padding: 0 0 0 5px;
   background-color: #ffffff;
 }
-#story-list .item .emblems span.label {
+#stories li .emblems span.label {
   font-weight: normal;
 }
 
-#story-list .item > a {
+#stories li, #stories li > a {
   background-color: #ffffff;
   color: #000000;
 }
-#story-list .item:hover > a {
-  background-color: #FBC02D;
-  color: #000000;
+#stories li:hover, #stories li:hover > a {
+  background-color: #000000;
+  color: #ffffff;
 }
- #story-list .item:hover .emblems {
-  background-color: #FBC02D;
+ #stories li:hover .emblems {
+  background-color: #000000;
 }
 
 #story-progress {
