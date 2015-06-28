@@ -1,32 +1,18 @@
-/* line 1, ../sass/views.index.scss */
 #view-index {
   display: none;
 }
 
-/* line 5, ../sass/views.index.scss */
-#header {
-  margin: 5px 5px 24px 5px;
-}
-
-/* line 6, ../sass/views.index.scss */
-#search {
-  width: 250px;
-}
-
-/* line 7, ../sass/views.index.scss */
-#actions {
-  float: right;
-}
+#header { margin: 5px 5px 24px 5px; }
+#search { width: 250px; }
+#actions { float: right; }
 
 /* List page only */
-/* line 11, ../sass/views.index.scss */
+
 #stories {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
-
-/* line 16, ../sass/views.index.scss */
 #stories li {
   display: block;
   margin: 10px 0;
@@ -34,21 +20,15 @@
   height: 25px;
   position: relative;
 }
-
-/* line 23, ../sass/views.index.scss */
 #stories li > a, #stories li > div {
   display: block;
   overflow: hidden;
   white-space: nowrap;
   text-decoration: none;
 }
-
-/* line 29, ../sass/views.index.scss */
 #stories li > a, #stories li > div, #stories li .emblems {
   height: 25px;
 }
-
-/* line 32, ../sass/views.index.scss */
 #stories li .emblems {
   display: block;
   position: absolute;
@@ -57,30 +37,22 @@
   padding: 0 0 0 5px;
   background-color: #ffffff;
 }
-
-/* line 40, ../sass/views.index.scss */
 #stories li .emblems span.label {
   font-weight: normal;
 }
 
-/* line 44, ../sass/views.index.scss */
 #stories li, #stories li > a {
   background-color: #ffffff;
   color: #000000;
 }
-
-/* line 48, ../sass/views.index.scss */
 #stories li:hover, #stories li:hover > a {
   background-color: #000000;
   color: #ffffff;
 }
-
-/* line 52, ../sass/views.index.scss */
-#stories li:hover .emblems {
+ #stories li:hover .emblems {
   background-color: #000000;
 }
 
-/* line 56, ../sass/views.index.scss */
 #story-progress {
   display: block;
   position: absolute;
@@ -92,31 +64,26 @@
   opacity: 0;
 }
 
-/* line 67, ../sass/views.index.scss */
 #story-progress span, #story-progress input {
   display: block;
   float: left;
   height: 26px;
 }
 
-/* line 73, ../sass/views.index.scss */
 #story-progress span {
   width: 190px;
 }
 
-/* line 77, ../sass/views.index.scss */
 #story-progress #story-page {
   text-align: right;
 }
 
-/* line 81, ../sass/views.index.scss */
 #story-progress input {
   width: 600px;
   margin-left: 10px;
   margin-right: 10px;
 }
 
-/* line 87, ../sass/views.index.scss */
 #story-progress:hover {
   opacity: 1.0;
 }

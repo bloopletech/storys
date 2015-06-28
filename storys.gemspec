@@ -20,6 +20,8 @@ Gem::Specification.new do |s|
   s.add_dependency "nsf"
   s.add_dependency "addressable", ">= 2.3.5"
   s.add_dependency "naturally", ">= 1.0.3"
+  s.add_dependency "bootstrap-sass", "2.3.2.2"
+  s.add_dependency "compass", "1.0.3"
 
   s.files        = `git ls-files`.split("\n")
   s.executables  = `git ls-files`.split("\n").map{|f| f =~ /^bin\/(.*)/ ? $1 : nil}.compact

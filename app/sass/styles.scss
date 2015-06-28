@@ -1,0 +1,13 @@
+$baseFontSize: 16px;
+$baseLineHeight: 22px;
+$sansFontFamily: "Open Sans", Helvetica, Arial, sans-serif;
+$textColor: #000000;
+
+@import "bootstrap";
+
+// Include responsive Bootstrap styles
+// @import "bootstrap-responsive";
+
+@import "app";
+@import "views.index";
+@import "views.show";
